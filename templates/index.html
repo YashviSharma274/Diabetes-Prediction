@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diabetes Stage Predictor</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+<body>
+  <main class="container">
+    <h1>Diabetes Prediction & Stage Checker</h1>
+    <p class="subtitle">Enter health indicators to estimate diabetes risk and likely stage.</p>
+
+    <form method="POST" class="card">
+      <label>Blood Glucose (mg/dL)
+        <input type="number" step="0.1" min="50" max="500" name="glucose" required>
+      </label>
+
+      <label>HbA1c (%)
+        <input type="number" step="0.1" min="3" max="15" name="hba1c" required>
+      </label>
+
+      <label>BMI
+        <input type="number" step="0.1" min="10" max="60" name="bmi" required>
+      </label>
+
+      <label>Age
+        <input type="number" min="1" max="120" name="age" required>
+      </label>
+
+      <label>Systolic Blood Pressure (mmHg)
+        <input type="number" min="70" max="250" name="blood_pressure" required>
+      </label>
+
+      <label>Activity Level
+        <select name="activity_level" required>
+          <option value="high">High</option>
+          <option value="moderate">Moderate</option>
+          <option value="low">Low</option>
+        </select>
+      </label>
+
+      <label>Family History of Diabetes
+        <select name="family_history" required>
+          <option value="no">No</option>
+          <option value="yes">Yes</option>
+        </select>
+      </label>
+
+      <button type="submit">Predict Stage</button>
+    </form>
+
+    {% if result %}
+      <section class="result card">
+        <h2>Prediction: {{ result }}</h2>
+        <p>{{ details }}</p>
+        <p class="note">Disclaimer: This is an educational risk estimator, not a medical diagnosis.</p>
+      </section>
+    {% endif %}
+  </main>
+</body>
+</html>
